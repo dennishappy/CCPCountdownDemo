@@ -1,6 +1,6 @@
-# CCPCountdownDemo
+# CCPCountdownDeme
 
-0行代码实现倒计时功能
+实现倒计时功能
 
 ##效果图
 
