@@ -19,11 +19,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    ////////////////////////////////
+    
     self.CCPCountDownBtn.originalColor = [UIColor purpleColor];
     
     self.CCPCountDownBtn.processColor = [UIColor greenColor];
     
     self.CCPCountDownBtn.durationOfCountDown = 10;
+    
+    
+    
+    ////////////////////////////////////////////////
     
     
     
