@@ -24,6 +24,9 @@
     
     self.CCPCountDownBtn.originalColor = [UIColor purpleColor];
     
+    
+    ////////////////////////////////444444444444444
+    
     self.CCPCountDownBtn.processColor = [UIColor greenColor];
     
     self.CCPCountDownBtn.durationOfCountDown = 10;
