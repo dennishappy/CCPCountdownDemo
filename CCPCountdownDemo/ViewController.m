@@ -40,7 +40,12 @@
 }
 
 - (void)didReceiveMemoryWarning {
+    
+    
     [super didReceiveMemoryWarning];
+
+/////////////////////////dfafafafaffaafafa
+
 }
 
 @end
