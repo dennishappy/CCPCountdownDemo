@@ -49,7 +49,7 @@
 - (void)setOriginalColor:(UIColor *)originalColor {
     
     _originalColor = originalColor;
-   
+    
     [self setTitleColor:originalColor forState:UIControlStateNormal];
 }
 
@@ -81,15 +81,14 @@
 }
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
-       
+        
         if (self.originalColor) {
             [self setTitleColor:self.originalColor forState:UIControlStateNormal];
         } else {
             //默认颜色红色
             [self setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-            
         }
-
+        
         self.count = 0;
         // 设置默认的倒计时时长为60秒
         self.durationOfCountDown = 60;
@@ -103,13 +102,14 @@
     self.count ++;
     // 若正在倒计时，不响应点击事件
     if (self.tempDurationOfCountDown != self.durationOfCountDown||self.count != 1) {
-        
         self.count = 0;
-        [self HUD];
+        self.enabled = NO;
         return NO;
     }
     // 若未开始倒计时，响应并传递点击事件，开始倒计时
-    [self startCountDown];
+    if (self.beginBlock) {
+        self.beginBlock();
+    }
     return [super beginTrackingWithTouch:touch withEvent:event];
 }
 
@@ -131,34 +131,18 @@
         self.tempDurationOfCountDown = self.durationOfCountDown;
         [self.ccpCountDownTimer invalidate];
         self.count = 0;
+        self.enabled = YES;
     } else {
         // 设置CCPCountDownButton的title为当前倒计时剩余的时间
         [self setTitle:[NSString stringWithFormat:@"重新发送(%zds)", self.tempDurationOfCountDown--] forState:UIControlStateNormal];
-        
-        
         if (self.processColor) {
-            
             [self setTitleColor:self.processColor forState:UIControlStateNormal];
-            
         } else {
             //默认颜色 蓝色
             [self setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-
         }
     }
 }
-
-- (void)HUD {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.superview.window animated:YES];
-    // Set the annular determinate mode to show task progress.
-    hud.mode = MBProgressHUDModeText;
-    hud.label.text = [NSString stringWithFormat:@"亲,%lds之内请勿重复操作",(long)self.durationOfCountDown];
-//    NSLocalizedString(@"亲,60s之内请勿重复操作", @"HUD message title");
-    // Move to bottm center.
-    hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
-    [hud hideAnimated:YES afterDelay:2.f];
-}
-
 
 - (void)dealloc {
     
